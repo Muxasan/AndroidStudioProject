@@ -1,41 +1,20 @@
 package evt14.bookmaster;
 
-import android.database.Cursor;
-import android.database.SQLException;
-import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.io.IOException;
-
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
-    //Переменная для работы с БД
-    private DBHelper mDBHelper;
-    private SQLiteDatabase mDb;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        mDBHelper = new DBHelper(this);
-
-        try {
-            mDBHelper.updateDataBase();
-        } catch (IOException mIOException) {
-            throw new Error("UnableToUpdateDatabase");
-        }
-
-        try {
-            mDb = mDBHelper.getWritableDatabase();
-        } catch (SQLException mSQLException) {
-            throw mSQLException;
-        }
 
         TextView categories = (TextView) findViewById(R.id.categories);
         Button buttonRC = (Button) findViewById(R.id.buttonRC);
@@ -46,31 +25,38 @@ public class MainActivity extends AppCompatActivity {
         buttonRC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, Activity_2.class);
+                intent.putExtra("Ganre","Русская классика");
+                startActivity(intent);
             }
         });
 
         buttonD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, Activity_2.class);
+                intent.putExtra("Ganre","Детектив");
+                startActivity(intent);
             }
         });
 
         buttonF.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, Activity_2.class);
+                intent.putExtra("Ganre","Фэнтези");
+                startActivity(intent);
             }
         });
 
         buttonP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(MainActivity.this, Activity_2.class);
+                intent.putExtra("Ganre","Приключения");
+                startActivity(intent);
             }
         });
-
 
     }
 }
