@@ -41,16 +41,14 @@ public class Activity_2 extends Activity {
 
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.mainlayout);
 
-       c = myDbHelper.query("Books",null,null,null,null,null,null);
+       c = myDbHelper.query("Books",null,"Ganre = ?",new String[]{Ganrel},null,null,null);
         c.moveToFirst();
-        while (!c.isAfterLast()) {
+        while (!c.isAfterLast())
+        {
             BookName = c.getString(1);
             BookImage = c.getInt(4);
 
-            int relativeId = 1;
-
             RelativeLayout relativeLayout = new RelativeLayout(getApplicationContext());
-            relativeLayout.setId(relativeId);
             mainLayout.addView(relativeLayout);
 
             ImageView imageView = new ImageView(getApplicationContext());
@@ -61,7 +59,6 @@ public class Activity_2 extends Activity {
             textView.setText(BookName);
             relativeLayout.addView(textView);
 
-            relativeId = relativeId + 1;
             c.moveToNext();
         }
         c.close();
