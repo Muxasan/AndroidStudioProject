@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -23,7 +24,7 @@ public class Activity_2 extends Activity {
 
         Bundle extras = getIntent().getExtras();
         String Ganrel =  extras.getString("Ganre");
-        String BookName = "";
+        String BookName;
         int BookImage;
 
         DatabaseHelper myDbHelper = new DatabaseHelper(getApplicationContext());
@@ -39,9 +40,16 @@ public class Activity_2 extends Activity {
         }
         Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
 
-        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.mainlayout);
+         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.mainlayout);
+        mainLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-       c = myDbHelper.query("Books",null,"Ganre = ?",new String[]{Ganrel},null,null,null);
+
+            }
+        });
+
+/*      c = myDbHelper.query("Books",null,"Ganre = ?",new String[]{Ganrel},null,null,null);
         c.moveToFirst();
         while (!c.isAfterLast())
         {
@@ -62,6 +70,6 @@ public class Activity_2 extends Activity {
             c.moveToNext();
         }
         c.close();
-        myDbHelper.close();
+*/      myDbHelper.close();
     }
 }
