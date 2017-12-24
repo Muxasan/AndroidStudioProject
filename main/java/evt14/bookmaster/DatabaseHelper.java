@@ -21,7 +21,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private final Context myContext;
 
     public DatabaseHelper(Context context) {
-        super(context, DB_NAME, null, 1);
+        super(context, DB_NAME, null, 10);
         this.myContext = context;
         this.DB_PATH = "/data/data/" + context.getPackageName() + "/" + "databases/";
         Log.e("Path 1", DB_PATH);
@@ -99,7 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     public Cursor query(String table, String[] columns, String selection, String[] selectionArgs, String groupBy, String having, String orderBy) {
-        return myDataBase.query("EMP_TABLE", null, null, null, null, null, null);
+        return myDataBase.query(table, columns, selection, selectionArgs, groupBy, having, orderBy);
     }
 
 

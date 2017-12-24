@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Activity_2.class);
-                intent.putExtra("Ganre","Русская классика");
+                intent.putExtra("ganre","Русская классика");
                 startActivity(intent);
             }
         });
@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Activity_2.class);
-                intent.putExtra("Ganre","Детектив");
+                intent.putExtra("ganre","Детектив");
                 startActivity(intent);
             }
         });
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Activity_2.class);
-                intent.putExtra("Ganre","Фэнтези");
+                intent.putExtra("ganre","Фэнтези");
                 startActivity(intent);
             }
         });
@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, Activity_2.class);
-                intent.putExtra("Ganre","Приключения");
+                intent.putExtra("ganre","Приключения");
                 startActivity(intent);
             }
         });

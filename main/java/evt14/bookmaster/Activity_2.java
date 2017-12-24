@@ -1,5 +1,6 @@
 package evt14.bookmaster;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.app.Activity;
@@ -10,7 +11,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.IOException;
 
 public class Activity_2 extends Activity {
@@ -23,9 +23,9 @@ public class Activity_2 extends Activity {
         setContentView(R.layout.activity_2);
 
         Bundle extras = getIntent().getExtras();
-        String Ganrel =  extras.getString("Ganre");
+        String Ganrel =  extras.getString("ganre");
         String BookName;
-        int BookImage;
+        String BookImage;
 
         DatabaseHelper myDbHelper = new DatabaseHelper(getApplicationContext());
         try {
@@ -40,36 +40,41 @@ public class Activity_2 extends Activity {
         }
         Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
 
-         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.mainlayout);
-        mainLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        LinearLayout mainLayout = (LinearLayout) findViewById(R.id.mainlayout);
 
-
-            }
-        });
-
-/*      c = myDbHelper.query("Books",null,"Ganre = ?",new String[]{Ganrel},null,null,null);
+        c = myDbHelper.query("books",null,"ganre = ?",new String[]{Ganrel},null,null,null);
         c.moveToFirst();
         while (!c.isAfterLast())
         {
             BookName = c.getString(1);
-            BookImage = c.getInt(4);
+            BookImage = c.getString(4);
+            final String forActivity_3 = BookName;
 
-            RelativeLayout relativeLayout = new RelativeLayout(getApplicationContext());
-            mainLayout.addView(relativeLayout);
+            //RelativeLayout relativeLayout = new RelativeLayout(getApplicationContext());
+            //mainLayout.addView(relativeLayout);
 
+            int resID = getResources().getIdentifier(BookImage , "drawable", getApplicationContext().getPackageName());
             ImageView imageView = new ImageView(getApplicationContext());
-            imageView.setImageResource(BookImage);
-            relativeLayout.addView(imageView);
+            imageView.setImageResource(resID);
+            mainLayout.addView(imageView);
 
             TextView textView = new TextView(getApplicationContext());
             textView.setText(BookName);
-            relativeLayout.addView(textView);
+            mainLayout.addView(textView);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                 Intent intent = new Intent(getApplicationContext(), Activity_3.class);
+                 intent.putExtra("name",forActivity_3);
+                 startActivity(intent);
+
+                }
+            });
 
             c.moveToNext();
         }
         c.close();
-*/      myDbHelper.close();
+        myDbHelper.close();
     }
 }
