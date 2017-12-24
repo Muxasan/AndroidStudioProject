@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.io.IOException;
 
 public class Activity_2 extends Activity {
@@ -40,8 +39,6 @@ public class Activity_2 extends Activity {
         } catch (SQLException sqle) {
             throw sqle;
         }
-        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
-
         LinearLayout mainLayout = (LinearLayout) findViewById(R.id.mainlayout);
 
         c = myDbHelper.query("books",null,"ganre = ?",new String[]{Ganrel},null,null,null);

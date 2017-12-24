@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.io.IOException;
 
 public class Activity_3 extends Activity {
@@ -33,17 +32,35 @@ public class Activity_3 extends Activity {
         } catch (SQLException sqle) {
             throw sqle;
         }
-        Toast.makeText(getApplicationContext(), "Success", Toast.LENGTH_SHORT).show();
         ScrollView scrollLayout = (ScrollView) findViewById(R.id.mailayout);
 
-        c = myDbHelper.query("books",null,"name = ?",new String[]{name},null,null,null);
+        String nametrue = "";
+        int x = 0;
+        c = myDbHelper.query("books",null,null,null,null,null,null);
         c.moveToFirst();
-        text = c.getString(3);
-        TextView textView = new TextView(getApplicationContext());
-        textView.setText(text);
-        scrollLayout.addView(textView);
-
+        while (!c.isAfterLast())
+        {
+            nametrue = c.getString(1);
+            if (name.equals(nametrue)) {
+                x = 1;
+            }
+            c.moveToNext();
+        }
         c.close();
+        if(x == 1) {
+            c = myDbHelper.query("books", null, "name = ?", new String[]{name}, null, null, null);
+            c.moveToFirst();
+            text = c.getString(3);
+            TextView textView = new TextView(getApplicationContext());
+            textView.setText(text);
+            scrollLayout.addView(textView);
+            c.close();
+        }
+        else{
+            TextView textView = new TextView(getApplicationContext());
+            textView.setText("Книга не найдена либо неправильно написано название");
+            scrollLayout.addView(textView);
+        }
         myDbHelper.close();
     }
 }
