@@ -5,10 +5,11 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.io.IOException;
@@ -26,6 +27,7 @@ public class Activity_2 extends Activity {
         String Ganrel =  extras.getString("ganre");
         String BookName;
         String BookImage;
+
 
         DatabaseHelper myDbHelper = new DatabaseHelper(getApplicationContext());
         try {
@@ -50,18 +52,29 @@ public class Activity_2 extends Activity {
             BookImage = c.getString(4);
             final String forActivity_3 = BookName;
 
-            //RelativeLayout relativeLayout = new RelativeLayout(getApplicationContext());
-            //mainLayout.addView(relativeLayout);
 
-            int resID = getResources().getIdentifier(BookImage , "drawable", getApplicationContext().getPackageName());
-            ImageView imageView = new ImageView(getApplicationContext());
-            imageView.setImageResource(resID);
-            mainLayout.addView(imageView);
+            int resID = getResources().getIdentifier(BookImage, "drawable", getApplicationContext().getPackageName());
+            ImageView image = new ImageView(getApplicationContext());
+            image.setImageResource(resID);
+            mainLayout.addView(image);
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
 
-            TextView textView = new TextView(getApplicationContext());
-            textView.setText(BookName);
-            mainLayout.addView(textView);
-            textView.setOnClickListener(new View.OnClickListener() {
+                    Intent intent = new Intent(getApplicationContext(), Activity_3.class);
+                    intent.putExtra("name",forActivity_3);
+                    startActivity(intent);
+
+                }
+            });
+
+            TextView text = new TextView(getApplicationContext());
+            text.setText(BookName);
+            text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+            text.setGravity(Gravity.CENTER_HORIZONTAL);
+
+            mainLayout.addView(text);
+            text.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
 
